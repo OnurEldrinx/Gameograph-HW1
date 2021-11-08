@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,11 +13,17 @@ public class PlayerController : MonoBehaviour
     private const float minSize = 0.1f;
     public bool gameOver = false;
 
+    public ParticleSystem deathEffect;
+
+    public TextMeshProUGUI gameOverText; 
+
     // Start is called before the first frame update
     void Start()
     {
 
         playerRigidbody = GetComponent<Rigidbody>();
+        
+        
 
     }
 
@@ -37,6 +44,13 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Game Over");
 
         }
+
+        if (gameOver)
+        {
+
+            GameOver();
+
+        }
         
 
     }
@@ -52,4 +66,32 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+        if(other.gameObject.CompareTag("Snowball") && !gameOver)
+        {
+
+            Destroy(other.gameObject);
+            transform.localScale += new Vector3(other.gameObject.transform.localScale.x / 10, other.gameObject.transform.localScale.y / 10, other.gameObject.transform.localScale.z / 10);
+
+        }
+
+    }
+
+    public void GameOver()
+    {
+
+        Destroy(gameObject);
+
+        Instantiate(deathEffect,transform.position,deathEffect.transform.rotation);
+
+        deathEffect.Play();
+
+        gameOverText.gameObject.SetActive(true);
+
+    }
+
+
 }

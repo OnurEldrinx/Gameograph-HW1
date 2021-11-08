@@ -6,6 +6,7 @@ public class SpawnManager : MonoBehaviour
 {
 
     public GameObject obstacle;
+    public GameObject snowball;
     private float xBound = 3.5f;
     private PlayerController playerController;
 
@@ -16,6 +17,7 @@ public class SpawnManager : MonoBehaviour
         playerController = GameObject.FindObjectOfType<PlayerController>();
 
         InvokeRepeating("SpawnObstacle",2,2);
+        InvokeRepeating("SpawnSnowball",4,4);
 
     }
 
@@ -31,5 +33,17 @@ public class SpawnManager : MonoBehaviour
         if (!playerController.gameOver) {
             Instantiate(obstacle, new Vector3(Random.Range(-xBound, xBound), 0.05f, 60f), obstacle.transform.rotation);
         }
-    } 
+    }
+    
+    public void SpawnSnowball()
+    {
+
+        if (!playerController.gameOver)
+        {
+
+            Instantiate(snowball, new Vector3(Random.Range(-xBound, xBound), 0.5f, 50f), snowball.transform.rotation);
+
+        }
+
+    }
 }
