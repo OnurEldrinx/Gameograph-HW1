@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 10;
     private float horizontalInput;
     private float meltingRate = 0.2f;
-    private const float minSize = 0.1f;
+    private const float minSize = 0.8f;
     public bool gameOver = false;
 
     public ParticleSystem deathEffect;
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
             transform.Translate(Vector3.right * horizontalInput * speed * Time.deltaTime);
         }
 
-        if (gameObject.transform.localScale == new Vector3(minSize,minSize,minSize))
+        if (gameObject.transform.localScale.x <= minSize)
         {
             gameOver = true;
             Debug.Log("Game Over");

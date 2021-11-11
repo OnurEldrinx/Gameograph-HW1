@@ -12,7 +12,6 @@ public class MoveForward : MonoBehaviour
     {
 
         playerController = GameObject.FindObjectOfType<PlayerController>();
-
     }
 
     // Update is called once per frame
@@ -21,20 +20,30 @@ public class MoveForward : MonoBehaviour
         if (!playerController.gameOver) {
             transform.Translate(Vector3.back * speed * Time.deltaTime);
         }
-        if (gameObject.tag.Equals("Road") && gameObject.transform.position.z <= -25 && !playerController.gameOver)
+        if (gameObject.tag.Equals("Road") && gameObject.transform.position.z <= -90 && !playerController.gameOver)
         {
 
-            gameObject.transform.position = new Vector3(0, 0, 25);
+            gameObject.transform.position = new Vector3(0, 0, 0);
 
         }
 
-        if (gameObject.CompareTag("Obstacle") && gameObject.transform.position.z <= -25 )
+        if (gameObject.CompareTag("Obstacle") && gameObject.transform.position.z <= -50 )
         {
 
             Destroy(gameObject);
 
         }
 
+        if (gameObject.CompareTag("Snowball") && gameObject.transform.position.z <= -50)
+        {
+
+            Destroy(gameObject);
+
+        }
+
+        
+
+        
     }
 
     
